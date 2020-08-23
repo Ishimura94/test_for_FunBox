@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<title>Тестовое задание для FunBox</title>
+</head>
+
+<body>
+
+	<div id="center">	<!-- для центровки контейнера ниже -->
+		<div id="container">
+			<div id="question">Ты сегодня покормил кота?</div>
+			<table>
+				<tr>
+					<td>
+						<label><input type="checkbox" class="in">
+							<span>
+								<div id="prparam">							<!-- информация о продукте -->
+									<div class="product_pres"></div>		<!-- не знаю, что это. наверное, слоган продукта. меняется в скрипте в массиве prpres -->
+									<div id="product_name">Нямушка</div>	<!-- название продукта -->
+									<div id="taste_name">с фуа-гра</div>	<!-- вкус -->
+									<div class="present"></div>				<!-- порции и подарки, меняются в скрипте в массиве pres -->
+								</div>
+								<div id="wparam">							<!-- информация о массе продукта -->
+									<div id="weight">0,5</div>				<!-- значение -->
+									<div id="units">кг</div>				<!-- единица измерения массы -->
+								</div>
+							</span>
+						</label>
+					</td>
+					<td>
+						<label><input type="checkbox" checked class="in">
+							<span>
+								<div id="prparam">
+									<div class="product_pres"></div>
+									<div id="product_name">Нямушка</div>
+									<div id="taste_name">с рыбой</div>
+									<div class="present"></div>
+								</div>
+								<div id="wparam">
+									<div id="weight">2</div>
+									<div id="units">кг</div>
+								</div>
+							</span>
+						</label>
+					</td>
+					<td>
+						<label><input type="checkbox" disabled class="in">
+							<span>
+								<div id="prparam">
+									<div class="product_pres"></div>
+									<div id="product_name">Нямушка</div>
+									<div id="taste_name">с курой</div>
+									<div class="present"></div>
+								</div>
+								<div id="wparam">
+									<div id="weight">5</div>
+									<div id="units">кг</div>
+								</div>
+							</span>
+						</label>
+					</td>
+				</tr>
+				<tr>
+					<td class="intext"></td> <!-- блок с изменяемыми надписями под чекбоксами, меняются в скрипте -->
+					<td class="intext"></td>
+					<td class="intext"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+</body>
+
+<!-- Скрипт для вывода и смены подписей под чекбоксами и для смены серых надписей на товаре на светло-серые при отключённом чекбоксе -->
+
+<script>
+
+	dis = ['фуа-гра', 'рыбой', 'курой']; //отображение вкуса под отключённым чекбоксом
+	det = ['Печень утки разварная с артишоками.', 'Головы щучьи с чесноком да свежайшая сёмгушка.', 'Филе из цыплят с трюфелями в бульоне.']; //состав под активным чекбоксом
+	
+	prpres = ['Сказочное заморское яство'];
+	// ниже в <span style="font-weight: bold;"></span> вводим количество порций и мышек
+	pres = ['<span style="font-weight: bold;">10</span> порций</br><span style="font-weight: bold;"></span> мышь в подарок', '<span style="font-weight: bold;">40</span> порций</br><span style="font-weight: bold;">2</span> мыши в подарок', '<span style="font-weight: bold;">100</span> порций</br><span style="font-weight: bold;">5</span> мышей в подарок<br>заказчик доволен'];
+
+	a = document.getElementsByClassName('in');
+	b = document.getElementsByClassName('intext');
+	c = document.getElementsByClassName('product_pres');
+	d = document.getElementsByClassName('present');
+
+	function myfn(el){
+		console.log(el.id)
+	}
+
+	for (let i = 0; i < a.length; i++) {
+		a[i].onchange = function (e) {
+			console.log(e)
+			if (this.disabled) {
+				b[i].innerHTML = '<div class="text" style="color: yellow;">' + 'Печалька, с ' + dis[i] + ' закончился.' + '</div>'	//текст под отключённым чекбоксом
+				c[i].innerHTML = '<div class="prpres1" style="color: lightgrey;">' + prpres[0] + '</div>'							//светло-серый слоган на отключённом чекбоксе
+				d[i].innerHTML = '<div class="pres1" style="color: lightgrey;">' + pres[i] + '</div>'								//светло-серые порции и подарки на отключённом чекбоксе
+				return
+			}
+			if (this.checked) {
+				b[i].innerHTML = '<div class="text">' + det[i] + '</div>'								//текст под активным чекбоксом
+				c[i].innerHTML = '<div class="prpres1" style="color: grey;">' + prpres[0] + '</div>'	//серый слоган на активном чекбоксе
+				d[i].innerHTML = '<div class="pres1" style="color: grey;">' + pres[i] + '</div>'		//серые порции и подарки на активном чекбоксе
+			}
+			else {
+				b[i].innerHTML = '<div class="text" class=buy>' + 'Чего сидишь, порадуй кота, ' + ' <a role="button" href="javascript:void(0);" style="color: #0099cc;" tabindex="0" id=buy'+i+' onclick="myfn(this)">купи.</a></div>'	//ссылка "ну купи" на дефолтном чекбоксе
+				c[i].innerHTML = '<div class="prpres1" style="color: grey;">' + prpres[0] + '</div>'	//серый слоган во всех других случаях (а остаётся только дефолтное состояние)
+				d[i].innerHTML = '<div class="pres1" style="color: grey;">' + pres[i] + '</div>'		//серые порции и подарки во всех других случаях (а остаётся только дефолтное состояние)
+			}
+		}
+		a[i].dispatchEvent(new Event('change'))
+		a[i].parentElement.onmouseout=function(){
+			console.log(a[i])
+		}
+
+	}
+
+</script>
+
+</html>

@@ -1,0 +1,147 @@
+body {
+	background: url(images/bg.png) no-repeat;
+	background-size: cover;
+	background-position: center;
+	color: black;
+	font-family: Trebuchet MS;
+	font-size: 13px;
+}
+
+@font-face {
+	font-family: Exo;
+	src: url(fonts/Exo2.0-Thin.otf);
+}
+
+#center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+#container {
+	/*background: white;*/
+	display: grid;
+	height: max-content;
+	width: max-content;
+}
+
+#question {
+	text-align: center;
+	color: white;
+	font-family: Exo;
+	font-size: 36px;
+	margin-bottom: 15px;
+}
+
+label {
+	width: 320px;
+	height: 480px;
+	display: inline-block;
+	position: relative;
+	margin-left: 40px;
+	margin-right: 40px;
+	margin-bottom: 13px;
+}
+
+table {
+	width: max-content;
+}
+
+table .absorbing-column {
+	width: 100%;
+}
+
+table tr {
+	text-align: center;
+}
+
+.text {
+	color: white;
+}
+
+#prparam {
+	height: 200px;
+}
+#wparam {
+	margin-top: 170px;
+	margin-left: 210px;
+}
+
+#weight, #units {
+	color: white;
+}
+
+.product_pres {
+	font-size: 16px;
+	margin-top: 20px;
+}
+
+#product_name {
+	font-size: 48px;
+	font-weight: bold;
+}
+
+#taste_name {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.present {
+	font-size: 14px;
+	margin-top: 15px;
+}
+
+
+#weight {
+	font-size: 42px;
+}
+
+#units {
+	font-size: 21px;
+	margin-top: -5px;
+}
+
+.product_pres, #product_name, #taste_name, .present {
+	text-align: left;
+	margin-left: 40px;
+}
+
+/*checkbox default*/
+	
+input[type="checkbox"] + span {
+	position: absolute;
+	left: 0; top: 0;
+	width: 100%;
+	height: 100%;
+	background: url(images/cat.png) no-repeat;
+	cursor: pointer;
+}
+
+/*checkbox default hover*/
+
+input[type="checkbox"]:hover + span {
+	background-position: 0 -480px;
+}
+
+/*checkbox checked*/
+
+input[type="checkbox"]:checked + span {
+	background-position: 0 -960px;
+}
+
+/*checkbox checked hover*/
+
+input[type="checkbox"]:checked:hover + span {
+	background-position: 0 -1440px;
+}
+
+/*checkbox disabled*/
+
+input[type="checkbox"]:disabled + span {
+	background-position: 0 -1920px;
+}
+
+input:disabled + span {
+	color: lightgrey;
+}
